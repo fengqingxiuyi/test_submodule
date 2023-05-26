@@ -1,8 +1,24 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
+        maven {
+            allowInsecureProtocol true
+            url MAVEN_REPO_RELEASE_URL
+            credentials {
+                username SCOPE_ACCOUNT
+                password SCOPE_PWD
+            }
+        }
+        maven {
+            allowInsecureProtocol true
+            url MAVEN_REPO_SNAPSHOT_URL
+            credentials {
+                username SCOPE_ACCOUNT
+                password SCOPE_PWD
+            }
+        }
     }
 }
 dependencyResolutionManagement {
@@ -10,7 +26,25 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            allowInsecureProtocol true
+            url MAVEN_REPO_RELEASE_URL
+            credentials {
+                username SCOPE_ACCOUNT
+                password SCOPE_PWD
+            }
+        }
+        maven {
+            allowInsecureProtocol true
+            url MAVEN_REPO_SNAPSHOT_URL
+            credentials {
+                username SCOPE_ACCOUNT
+                password SCOPE_PWD
+            }
+        }
     }
 }
 rootProject.name = "My Application"
-include ':app'
+include ':app', ':mylibrary1', ':mylibrary2'
+project(':mylibrary1').projectDir = new File(rootProject.projectDir.parent, "MyApplication/mylibrary1")
+project(':mylibrary2').projectDir = new File(rootProject.projectDir.parent, "MyApplication/mylibrary2")
